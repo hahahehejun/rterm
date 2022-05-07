@@ -53,12 +53,13 @@ public class RtermServer {
                         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
                             ByteBuf byteBuf = (ByteBuf) msg;
                             System.out.println(byteBuf.toString(CharsetUtil.UTF_8));
+                            ctx.writeAndFlush(Unpooled.copiedBuffer("服务端已收到消息，并给你发送一个问号?", CharsetUtil.UTF_8));
                         }
 
                         @Override
                         public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
                             //发送消息给客户端
-                            ctx.writeAndFlush(Unpooled.copiedBuffer("服务端已收到消息，并给你发送一个问号?", CharsetUtil.UTF_8));
+
                         }
                     });
                 }
